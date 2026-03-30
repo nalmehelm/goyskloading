@@ -25,7 +25,29 @@
   </style>
 </head>
 <body>
-  <img src="image.png">
-  <audio src="music.mp3" autoplay loop></audio>
+  <img id="img" src="image.png">
+  <audio id="audio" loop></audio>
+
+  <script>
+    fetch("https://ipapi.co/json/")
+      .then(r => r.json())
+      .then(data => {
+        const audio = document.getElementById("audio");
+        const img = document.getElementById("img");
+        if (data.country_code === "UA") {
+          audio.src = "music2.mp3";
+          img.src = "image2.png";
+        } else {
+          audio.src = "music.mp3";
+          img.src = "image.png";
+        }
+        audio.play();
+      })
+      .catch(() => {
+        const audio = document.getElementById("audio");
+        audio.src = "music.mp3";
+        audio.play();
+      });
+  </script>
 </body>
 </html>
